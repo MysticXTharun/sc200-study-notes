@@ -319,4 +319,5 @@ Organizations use Microsoft Defender XDR for real-time detection, investigation,
 
 * ✅ Section 1 – SC-200 Overview
 * ✅ Section 2 – Microsoft Security Ecosystem
-* ⏳ Section 3 – Microsoft Defender XDR Architecture (Next)
+* ✅ Section 3 – Microsoft Defender XDR Architecture
+* ⏳ Section 4 - Microsoft Defender Portal (next)
