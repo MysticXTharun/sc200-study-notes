@@ -1,136 +1,157 @@
-# Day 1 - Microsoft Security Fundamentals
+# Day 1: Microsoft Security Fundamentals
 
-## Objectives
+## Overview
 
-* Understand the purpose of the SC-200 certification.
-* Learn the Microsoft Security ecosystem.
-* Understand the role of Microsoft Defender XDR.
-* Differentiate between incidents and alerts.
-* Learn about assets, identities, devices, and mailboxes.
-* Get introduced to Kusto Query Language (KQL).
+Day 1 introduces the SC-200 certification, the role of a Security Operations Analyst, and the Microsoft security ecosystem.
 
----
+The main focus is understanding how Microsoft Sentinel and Microsoft Defender XDR help security teams detect, investigate, and respond to threats.
 
-# What is SC-200?
+## Learning Objectives
 
-SC-200 is the **Microsoft Security Operations Analyst** certification that validates the skills required to detect, investigate, respond to, and remediate cyber threats using Microsoft security solutions such as **Microsoft Defender XDR** and **Microsoft Sentinel**.
+By the end of Day 1, I should be able to:
 
----
+- Explain the purpose of the SC-200 certification
+- Describe the role of a Security Operations Analyst
+- Understand the Microsoft security ecosystem
+- Explain the purpose of Microsoft Defender XDR
+- Navigate the Microsoft Defender portal
+- Differentiate between events, alerts, and incidents
+- Identify common security entities
+- Understand the basic purpose of Microsoft Sentinel
+- Write simple KQL queries
 
-# Who Should Take SC-200?
+## 1. SC-200 Certification Overview
 
-This certification is designed for:
+The SC-200 certification is designed for Security Operations Analysts who use Microsoft security technologies to:
 
-* Security Operations Center (SOC) Analysts
-* Cybersecurity Analysts
-* Incident Responders
-* Threat Hunters
-* Security Engineers working with Microsoft security technologies
+- Monitor security environments
+- Detect suspicious activities
+- Investigate alerts and incidents
+- Respond to security threats
+- Perform threat hunting
+- Improve security detections
+- Automate incident-response activities
 
-It is ideal for professionals who want to build or advance their careers in Microsoft-based Security Operations.
+The primary technologies covered in SC-200 are:
 
----
+- Microsoft Sentinel
+- Microsoft Defender XDR
+- Microsoft Defender for Endpoint
+- Microsoft Defender for Office 365
+- Microsoft Defender for Identity
+- Microsoft Defender for Cloud Apps
+- Microsoft Entra ID Protection
+- Kusto Query Language
 
-# Major Microsoft Security Products Covered
+## 2. Security Operations Analyst Role
 
-The SC-200 certification focuses on the following Microsoft security solutions:
+A Security Operations Analyst is responsible for protecting an organisation by monitoring, detecting, investigating, and responding to security threats.
 
-* Microsoft Sentinel
-* Microsoft Defender XDR
-* Microsoft Defender for Endpoint
-* Microsoft Defender for Office 365
-* Microsoft Defender for Identity
-* Microsoft Defender for Cloud Apps
+### Common Responsibilities
 
-These products work together to provide threat detection, investigation, response, and hunting capabilities across an organization's environment.
+- Monitor security alerts
+- Perform initial alert triage
+- Investigate suspicious activities
+- Analyse endpoint, identity, email, and cloud data
+- Determine whether an alert is malicious or benign
+- Assign incident severity
+- Contain affected users and devices
+- Escalate confirmed incidents
+- Document investigation findings
+- Perform proactive threat hunting
+- Tune detection rules
+- Reduce false-positive alerts
 
----
+## 3. Microsoft Security Ecosystem
 
-# Skills Measured
+The Microsoft security ecosystem provides security visibility across identities, endpoints, email, applications, cloud resources, and network activity.
 
-The SC-200 certification develops the skills required to:
+| Technology | Main Purpose |
+|---|---|
+| Microsoft Sentinel | Cloud-native SIEM and security orchestration platform |
+| Microsoft Defender XDR | Correlates security data across multiple Defender products |
+| Defender for Endpoint | Protects and monitors endpoint devices |
+| Defender for Identity | Detects identity-based threats |
+| Defender for Office 365 | Protects email and collaboration services |
+| Defender for Cloud Apps | Provides visibility and control over cloud applications |
+| Defender for Cloud | Protects cloud workloads and resources |
+| Entra ID Protection | Detects risky users and sign-in activity |
 
-* Monitor security alerts and incidents.
-* Perform alert triage and investigations.
-* Respond to and remediate security incidents.
-* Perform threat hunting using Kusto Query Language (KQL).
-* Analyze threats across Microsoft security products.
-* Automate security operations using Microsoft technologies.
+## 4. Microsoft Sentinel
 
----
+Microsoft Sentinel is a cloud-native SIEM and SOAR platform.
 
-# Why is SC-200 Important?
+### SIEM
 
-Organizations using Microsoft security solutions require analysts who can effectively investigate and respond to cyber threats. SC-200 demonstrates practical knowledge of Microsoft Defender XDR, Microsoft Sentinel, KQL, and modern Security Operations Center (SOC) workflows.
+SIEM stands for Security Information and Event Management.
 
----
+A SIEM platform helps security teams:
 
-# Microsoft Security Products Covered
+- Collect logs from different sources
+- Store and analyse security data
+- Detect suspicious activities
+- Generate alerts
+- Correlate related events
+- Create security incidents
+- Support threat hunting and investigation
 
-| Product                           | Purpose                                                                                                           |
-| --------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| Microsoft Sentinel                | Cloud-native SIEM and SOAR platform used for monitoring, threat detection, investigation, and response.           |
-| Microsoft Defender XDR            | Unified Extended Detection and Response (XDR) platform that correlates alerts across Microsoft security products. |
-| Microsoft Defender for Endpoint   | Endpoint Detection and Response (EDR) solution for protecting Windows, Linux, macOS, Android, and iOS devices.    |
-| Microsoft Defender for Office 365 | Protects email, Teams, SharePoint, and OneDrive from phishing, malware, and malicious links.                      |
-| Microsoft Defender for Identity   | Detects identity-based attacks such as Pass-the-Hash, Kerberoasting, and lateral movement in Active Directory.    |
-| Microsoft Defender for Cloud Apps | Provides Cloud Access Security Broker (CASB) capabilities to monitor and secure cloud applications.               |
+### SOAR
 
----
+SOAR stands for Security Orchestration, Automation, and Response.
 
-# Key Takeaways
+SOAR capabilities help security teams:
 
-* SC-200 is Microsoft's Security Operations Analyst certification.
-* Microsoft Sentinel is Microsoft's SIEM and SOAR platform.
-* Microsoft Defender XDR provides unified threat detection and response.
-* KQL is the primary language used for threat hunting and log analysis.
-* SC-200 focuses on practical SOC operations using Microsoft security technologies.
+- Automate repetitive tasks
+- Enrich alerts with additional information
+- Assign incidents automatically
+- Notify analysts
+- Block malicious indicators
+- Run incident-response playbooks
 
----
+### Important Sentinel Components
 
-# Interview Questions
+- Log Analytics workspace
+- Data connectors
+- Analytics rules
+- Alerts
+- Incidents
+- Entities
+- Hunting queries
+- Workbooks
+- Watchlists
+- Automation rules
+- Playbooks
 
-### 1. What is SC-200?
+## 5. Microsoft Defender XDR
 
-SC-200 is a Microsoft certification that validates the skills required to detect, investigate, respond to, and remediate cyber threats using Microsoft security solutions.
+Microsoft Defender XDR is an extended detection and response platform.
 
----
+It combines security information from multiple Microsoft Defender products to provide a unified view of attacks.
 
-### 2. Who should take SC-200?
+### Defender XDR Data Sources
 
-SOC Analysts, Cybersecurity Analysts, Incident Responders, Threat Hunters, and professionals working with Microsoft security technologies.
+- Endpoints
+- User identities
+- Email messages
+- Microsoft 365 applications
+- Cloud applications
 
----
+### Main Capabilities
 
-### 3. What Microsoft products are covered in SC-200?
+- Centralised alert monitoring
+- Automatic alert correlation
+- Incident creation
+- Cross-domain investigation
+- Automated investigation and response
+- Advanced hunting
+- Threat analytics
+- Security reports
 
-* Microsoft Sentinel
-* Microsoft Defender XDR
-* Microsoft Defender for Endpoint
-* Microsoft Defender for Office 365
-* Microsoft Defender for Identity
-* Microsoft Defender for Cloud Apps
+## 6. Microsoft Defender Portal
 
----
+Microsoft Defender XDR is accessed through the Microsoft Defender portal.
 
-### 4. What skills are measured?
+Portal address:
 
-* Security monitoring
-* Alert triage
-* Incident investigation
-* Threat hunting using KQL
-* Threat response
-* Security automation
-
----
-
-# References
-
-* Microsoft Learn – SC-200 Learning Path
-* Microsoft Defender XDR Documentation
-* Microsoft Sentinel Documentation
-* Microsoft Learn – Kusto Query Language (KQL)
-
----
-
-**Status:** ✅ Day 1 (Section 1) Completed
+```text
+https://security.microsoft.com
