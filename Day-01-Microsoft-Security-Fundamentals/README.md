@@ -306,18 +306,479 @@ Organizations use Microsoft Defender XDR for real-time detection, investigation,
 
 ---
 
-## References
+# Section 3 – Microsoft Defender XDR Architecture
 
-* Microsoft Learn – SC-200 Learning Path
-* Microsoft Defender XDR Documentation
-* Microsoft Sentinel Documentation
-* Microsoft Learn – Kusto Query Language (KQL)
+## What is Microsoft Defender XDR Architecture?
+
+Microsoft Defender XDR is Microsoft's unified Extended Detection and Response platform. It integrates security signals from endpoints, identities, email, cloud applications, and other Microsoft security services.
+
+It collects and correlates related alerts into a single incident and provides SOC analysts with a centralized platform for investigation, threat hunting, automated response, and attack disruption.
+
+Microsoft Defender XDR can be considered the central brain of the Microsoft security ecosystem because it connects security data from multiple Defender products.
 
 ---
 
-# Status
+## Main Microsoft Defender XDR Products
+
+### Microsoft Defender for Endpoint
+
+Microsoft Defender for Endpoint protects endpoint devices and operating systems, including:
+
+* Windows
+* Linux
+* macOS
+* Android
+* iOS
+
+It collects endpoint telemetry such as:
+
+* Process executions
+* File activity
+* Network connections
+* Registry changes
+* Malware detections
+* Device vulnerabilities
+
+It can also perform response actions such as isolating a device, running an antivirus scan, collecting an investigation package, and initiating live response.
+
+---
+
+### Microsoft Defender for Office 365
+
+Microsoft Defender for Office 365 protects Microsoft 365 communication and collaboration services, including:
+
+* Exchange Online
+* Outlook
+* Microsoft Teams
+* SharePoint
+* OneDrive
+
+It detects threats such as:
+
+* Phishing emails
+* Malicious attachments
+* Malicious links
+* Business Email Compromise
+* Spam
+* Account compromise attempts
+
+---
+
+### Microsoft Defender for Identity
+
+Microsoft Defender for Identity protects on-premises and hybrid identity environments, including:
+
+* Active Directory
+* Domain Controllers
+* Hybrid identities
+
+It detects identity-based attacks such as:
+
+* Credential theft
+* Pass-the-Hash
+* Pass-the-Ticket
+* Kerberoasting
+* Suspicious authentication
+* Lateral movement
+* Domain reconnaissance
+
+---
+
+### Microsoft Defender for Cloud Apps
+
+Microsoft Defender for Cloud Apps protects Software as a Service and cloud applications.
+
+It helps identify:
+
+* Shadow IT
+* Impossible travel
+* Suspicious cloud activity
+* OAuth application abuse
+* Unusual downloads
+* Data exfiltration
+* Risky cloud applications
+
+---
+
+## Defender XDR Data Flow
+
+```text
+User or System Activity
+          ↓
+Security Event
+          ↓
+Microsoft Defender Product
+          ↓
+Alert Generated
+          ↓
+Microsoft Defender XDR
+          ↓
+Alert Correlation
+          ↓
+Single Incident
+          ↓
+SOC Investigation
+          ↓
+Containment and Remediation
+```
+
+A user or system activity generates security telemetry. The relevant Microsoft Defender product analyzes the activity and generates an alert when suspicious or malicious behavior is detected.
+
+Microsoft Defender XDR collects related alerts from different security domains and correlates them into a single incident representing the complete attack chain.
+
+---
+
+## How Incidents are Created
+
+Microsoft Defender XDR uses its correlation engine to identify relationships between alerts.
+
+It considers information such as:
+
+* Affected users
+* Affected devices
+* Email messages
+* IP addresses
+* Processes
+* Files
+* Attack techniques
+* Time of activity
+
+Related alerts are grouped into one incident, allowing analysts to investigate the complete attack rather than reviewing every alert separately.
+
+---
+
+## Example Attack Correlation
+
+```text
+Phishing Email
+      ↓
+Defender for Office 365 Alert
+      ↓
+Credentials Stolen
+      ↓
+Defender for Identity Alert
+      ↓
+Malware Executed
+      ↓
+Defender for Endpoint Alert
+      ↓
+Microsoft Defender XDR
+      ↓
+One Correlated Incident
+```
+
+---
+
+## Why Defender XDR Reduces Analyst Workload
+
+Microsoft Defender XDR reduces SOC analyst workload by:
+
+* Correlating related alerts automatically
+* Reducing alert fatigue
+* Providing a unified attack timeline
+* Collecting evidence automatically
+* Displaying affected users and devices
+* Providing recommended response actions
+* Supporting automated investigation
+* Supporting automatic attack disruption
+
+Instead of reviewing several unrelated alerts individually, analysts can investigate the complete attack from a single incident.
+
+---
+
+## Interview Questions
+
+### What is Microsoft Defender XDR architecture?
+
+Microsoft Defender XDR is Microsoft's unified Extended Detection and Response architecture. It integrates signals from Defender for Endpoint, Defender for Office 365, Defender for Identity, and Defender for Cloud Apps. It correlates related alerts into a single incident and provides centralized investigation, threat hunting, automated response, and attack disruption capabilities.
+
+### How are incidents created in Microsoft Defender XDR?
+
+Microsoft Defender XDR analyzes relationships between alerts, users, devices, files, processes, emails, IP addresses, and attack techniques. It then correlates related alerts into a single incident representing one attack or campaign.
+
+### Why does Microsoft Defender XDR reduce analyst workload?
+
+It automatically correlates alerts, gathers evidence, provides an attack timeline, identifies affected assets, and recommends response actions. This reduces manual investigation time and helps analysts respond within the required SLA.
+
+---
+
+# Section 4 – Microsoft Defender Portal
+
+## What is the Microsoft Defender Portal?
+
+The Microsoft Defender Portal is a centralized web-based security console where SOC analysts monitor, investigate, hunt, respond to, and remediate security threats across an organization's Microsoft environment.
+
+The portal can be accessed through:
+
+```text
+https://security.microsoft.com
+```
+
+It provides a single interface for endpoints, identities, email, cloud applications, alerts, incidents, hunting, and response actions.
+
+---
+
+## Major Defender Portal Sections
+
+### Home
+
+The Home page provides a high-level overview of the organization's security environment.
+
+It may display:
+
+* Active incidents
+* Active alerts
+* Devices at risk
+* Security recommendations
+* Recent security activities
+* Security posture information
+
+---
+
+### Incidents
+
+The Incidents page contains correlated security investigations.
+
+An incident may include:
+
+* One or more related alerts
+* Affected users
+* Affected devices
+* Email messages
+* Files
+* Processes
+* Attack timeline
+* Evidence
+* MITRE ATT&CK techniques
+* Recommended actions
+
+Incidents are generally prioritized because they provide the complete context of an attack.
+
+---
+
+### Alerts
+
+The Alerts page displays individual security detections generated by Microsoft Defender products.
+
+Examples include:
+
+* Suspicious PowerShell activity
+* Malware detection
+* Phishing email
+* Impossible travel
+* Credential theft
+* Malicious attachment
+* Lateral movement
+
+One or more related alerts may be grouped into a single incident.
+
+---
+
+### Assets
+
+The Assets section provides information about entities involved in security activity.
+
+Examples include:
+
+* Devices
+* Users
+* Identities
+* Mailboxes
+* IP addresses
+
+Analysts can use asset pages to review risk, alerts, incidents, timelines, logged-on users, software, and other related information.
+
+---
+
+### Action Center
+
+The Action Center displays security response actions performed manually or automatically.
+
+It may include:
+
+* Device isolation
+* File quarantine
+* Antivirus scans
+* User containment
+* Investigation actions
+* Pending actions
+* Completed actions
+* Failed actions
+* Actions awaiting approval
+
+The Action Center helps analysts verify that containment and remediation actions were successfully completed.
+
+---
+
+### Email and Collaboration
+
+This section is powered by Microsoft Defender for Office 365.
+
+It is used to investigate:
+
+* Phishing emails
+* Malicious attachments
+* Malicious URLs
+* Email campaigns
+* Business Email Compromise
+* Teams-related threats
+
+---
+
+### Endpoints
+
+This section is powered by Microsoft Defender for Endpoint.
+
+It provides:
+
+* Device inventory
+* Device risk information
+* Device timelines
+* Vulnerability information
+* Antivirus status
+* Running processes
+* Logged-on users
+* Response actions
+
+---
+
+### Identity
+
+This section is powered by Microsoft Defender for Identity.
+
+It provides information about:
+
+* User identities
+* Domain Controllers
+* Authentication activities
+* Credential theft
+* Lateral movement
+* Identity-related alerts
+
+---
+
+### Cloud Apps
+
+This section is powered by Microsoft Defender for Cloud Apps.
+
+It helps monitor:
+
+* SaaS applications
+* Cloud activities
+* OAuth applications
+* Shadow IT
+* Suspicious downloads
+* Impossible travel
+* Data exfiltration
+
+---
+
+### Hunting
+
+The Hunting section is used for proactive threat hunting using Kusto Query Language.
+
+Analysts can search for:
+
+* Suspicious processes
+* Failed authentication
+* PowerShell abuse
+* Malware activity
+* Malicious network connections
+* Credential theft
+* Ransomware behavior
+
+Threat hunting helps identify hidden or previously undetected threats.
+
+---
+
+### Reports
+
+The Reports section provides security metrics and trends, including:
+
+* Incident trends
+* Alert trends
+* Device exposure
+* Security posture
+* Threat statistics
+* Response performance
+
+---
+
+## Defender Portal Investigation Workflow
+
+```text
+Alert Generated
+      ↓
+Incident Created
+      ↓
+SOC Analyst Opens Incident
+      ↓
+Reviews Alerts and Timeline
+      ↓
+Identifies Affected Assets
+      ↓
+Investigates Email, Identity and Endpoint
+      ↓
+Contains the Threat
+      ↓
+Remediates the Environment
+      ↓
+Verifies Actions in Action Center
+      ↓
+Closes the Incident
+```
+
+---
+
+## Defender Portal Product Mapping
+
+| Portal Section          | Microsoft Product                    |
+| ----------------------- | ------------------------------------ |
+| Incidents               | Microsoft Defender XDR               |
+| Alerts                  | Microsoft Defender security products |
+| Endpoints               | Microsoft Defender for Endpoint      |
+| Identity                | Microsoft Defender for Identity      |
+| Email and Collaboration | Microsoft Defender for Office 365    |
+| Cloud Apps              | Microsoft Defender for Cloud Apps    |
+| Hunting                 | Microsoft Defender XDR               |
+| Action Center           | Microsoft Defender XDR               |
+
+---
+
+## Interview Questions
+
+### What is the Microsoft Defender Portal?
+
+The Microsoft Defender Portal is a centralized web-based security console where SOC analysts monitor incidents, investigate alerts, hunt threats, respond to attacks, isolate devices, and perform remediation across Microsoft security products.
+
+### Why is the Incidents page more important than the Alerts page?
+
+The Incidents page provides the complete attack context by grouping related alerts, users, devices, emails, files, and evidence into one investigation. The Alerts page displays individual detections, while the Incidents page shows the broader attack chain.
+
+### What information is available in the Assets section?
+
+The Assets section contains information about devices, users, identities, mailboxes, and IP addresses. Analysts can review their risk level, related alerts, incidents, timeline, software, and other security information.
+
+### What is the purpose of the Action Center?
+
+The Action Center displays automated and manual response actions. It allows analysts to review pending, completed, failed, and approved actions such as device isolation, file quarantine, antivirus scans, and investigation activities.
+
+### Which section is used for proactive threat hunting?
+
+The Hunting section is used to proactively search for hidden or undetected threats using Kusto Query Language.
+
+---
+
+# Progress
 
 * ✅ Section 1 – SC-200 Overview
 * ✅ Section 2 – Microsoft Security Ecosystem
 * ✅ Section 3 – Microsoft Defender XDR Architecture
-* ⏳ Section 4 - Microsoft Defender Portal (next)
+* ✅ Section 4 – Microsoft Defender Portal
+* ⏳ Section 5 – Incidents and Alerts
+* ⬜ Section 6 – Assets and Entities
+* ⬜ Section 7 – Investigation Graph and Evidence
+* ⬜ Section 8 – Automated Investigation and Response
+* ⬜ Section 9 – Automatic Attack Disruption
+* ⬜ Section 10 – KQL Introduction
+* ⬜ Section 11 – Day 1 Revision and Quiz
