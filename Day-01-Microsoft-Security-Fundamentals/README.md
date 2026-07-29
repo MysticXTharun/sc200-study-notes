@@ -1093,6 +1093,215 @@ They help analysts determine business impact, prioritize incidents, and identify
 
 ---
 
+# Section 7 – Investigation Graph and Evidence
+
+## What is the Investigation Graph?
+
+The **Investigation Graph** is a visual representation of all related entities and evidence involved in an incident. It helps analysts understand the attack path without manually reviewing every log.
+
+---
+
+## Why is the Investigation Graph Important?
+
+* Visualizes relationships between entities
+* Speeds up investigations
+* Helps identify the attack path
+* Simplifies Root Cause Analysis (RCA)
+* Reduces manual log correlation
+
+---
+
+## Common Entities in the Investigation Graph
+
+* User
+* Device
+* Email
+* Process
+* File
+* URL
+* Domain
+* IP Address
+
+---
+
+## What is Evidence?
+
+**Evidence** is the information collected during an investigation that helps determine what happened, when it happened, and how the attack occurred.
+
+### Examples of Evidence
+
+* Process command line
+* File hash
+* Authentication logs
+* Network connection logs
+* Registry changes
+* Email headers
+
+---
+
+## Entity vs Evidence
+
+| Entity                         | Evidence                                   |
+| ------------------------------ | ------------------------------------------ |
+| Object involved in an incident | Information collected during investigation |
+| User                           | Authentication log                         |
+| Device                         | Device timeline                            |
+| Process                        | Command line                               |
+| File                           | File hash                                  |
+| IP Address                     | Network connection record                  |
+
+---
+
+## Automatic Evidence Collection
+
+Microsoft Defender XDR automatically collects investigation data from integrated Defender services, reducing manual effort and helping analysts investigate incidents faster.
+
+Collected information may include:
+
+* Running processes
+* File hashes
+* Registry changes
+* Network connections
+* Authentication events
+* Email metadata
+
+---
+
+## Process Tree
+
+A **Process Tree** is a hierarchical view showing the parent-child relationship between processes.
+
+Example:
+
+```text
+explorer.exe
+      ↓
+powershell.exe
+      ↓
+cmd.exe
+      ↓
+payload.exe
+```
+
+The Process Tree helps analysts:
+
+* Identify suspicious process chains
+* Find the parent process
+* Review command-line arguments
+* Detect malware execution
+* Trace the attack path
+
+---
+
+## Investigation Timeline
+
+The Investigation Timeline displays events in chronological order, helping analysts reconstruct the attack sequence.
+
+Example:
+
+```text
+Email Delivered
+      ↓
+User Clicked Link
+      ↓
+PowerShell Started
+      ↓
+Malware Downloaded
+      ↓
+Credential Theft
+```
+
+---
+
+## Investigation Workflow
+
+```text
+Open Incident
+      ↓
+Review Alerts
+      ↓
+Open Investigation Graph
+      ↓
+Review Timeline
+      ↓
+Analyze Entities
+      ↓
+Collect Evidence
+      ↓
+Identify Root Cause
+      ↓
+Contain
+      ↓
+Eradicate
+      ↓
+Recover
+      ↓
+Close Incident
+```
+
+---
+
+## Root Cause Analysis (RCA)
+
+The Investigation Graph helps identify:
+
+* Initial access
+* Malware execution
+* Persistence
+* Lateral movement
+* Impact
+* Root cause
+
+---
+
+# Interview Questions (Quick Revision)
+
+### What is the Investigation Graph?
+
+A visual representation of entities and evidence connected to an incident.
+
+### Why is the Investigation Graph useful?
+
+It helps analysts quickly understand relationships, identify the attack path, and investigate incidents faster.
+
+### What is evidence?
+
+Information collected during an investigation that helps determine what happened.
+
+### Difference between evidence and an entity?
+
+An **entity** is an object involved in an incident, while **evidence** is the information collected about that object to support the investigation.
+
+### Give five examples of evidence.
+
+* Process command line
+* File hash
+* Authentication log
+* Network connection log
+* Registry change
+
+### What is a Process Tree?
+
+A hierarchical view showing the parent-child relationship between processes running on a device.
+
+### Why is the Process Tree important?
+
+It helps identify suspicious process execution, understand process relationships, trace malware execution, and collect evidence.
+
+### What is automatic evidence collection?
+
+Microsoft Defender XDR automatically gathers investigation data from integrated Defender services, reducing manual effort and speeding up investigations.
+
+### How does the Investigation Timeline help analysts?
+
+It presents events in chronological order, helping analysts reconstruct the attack, identify the root cause, and map activities to the MITRE ATT&CK framework.
+
+### How would you investigate a phishing incident using the Investigation Graph?
+
+Review the sender and recipient, verify whether the user clicked the link, analyze the affected device, examine the Process Tree, review collected evidence, identify the root cause, and perform containment and recovery.
+
+---
+
 # Progress
 
 * ✅ Section 1 – SC-200 Overview
@@ -1101,8 +1310,8 @@ They help analysts determine business impact, prioritize incidents, and identify
 * ✅ Section 4 – Microsoft Defender Portal
 * ✅ Section 5 – Incidents and Alerts
 * ✅ Section 6 – Assets and Entities
-* ⏳ Section 7 – Investigation Graph and Evidence
-* ⬜ Section 8 – Automated Investigation and Response
+* ✅ Section 7 – Investigation Graph and Evidence
+* ⏳ Section 8 – Automated Investigation and Response
 * ⬜ Section 9 – Automatic Attack Disruption
 * ⬜ Section 10 – KQL Introduction
 * ⬜ Section 11 – Day 1 Revision and Quiz
