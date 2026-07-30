@@ -1783,6 +1783,476 @@ Attack Disruption immediately stops or limits ransomware activity by isolating d
 
 ---
 
+# Section 10 – Kusto Query Language (KQL) Introduction
+
+## What is KQL?
+
+**Kusto Query Language (KQL)** is a read-only query language used to search, filter, analyze, and summarize large volumes of security and log data.
+
+Microsoft security products that use KQL include:
+
+* Microsoft Defender XDR (Advanced Hunting)
+* Microsoft Sentinel
+* Azure Log Analytics
+
+---
+
+## Why SOC Analysts Use KQL
+
+SOC analysts use KQL to:
+
+* Search security logs
+* Investigate incidents
+* Hunt threats
+* Analyze authentication events
+* Detect suspicious processes
+* Create custom detections
+* Generate reports
+
+---
+
+## Basic Query Structure
+
+Every KQL query starts with a table.
+
+```text
+Table
+    ↓
+where
+    ↓
+project
+    ↓
+summarize
+    ↓
+sort
+    ↓
+take
+```
+
+Example:
+
+```kusto
+DeviceProcessEvents
+| where Timestamp > ago(24h)
+| take 10
+```
+
+---
+
+## Common Tables
+
+| Table               | Purpose                |
+| ------------------- | ---------------------- |
+| DeviceProcessEvents | Process execution      |
+| DeviceNetworkEvents | Network activity       |
+| DeviceLogonEvents   | Authentication events  |
+| DeviceFileEvents    | File activity          |
+| EmailEvents         | Email activity         |
+| AlertInfo           | Alert details          |
+| AlertEvidence       | Investigation evidence |
+
+---
+
+## Common KQL Operators
+
+### where
+
+Filters rows.
+
+```kusto
+DeviceProcessEvents
+| where FileName =~ "powershell.exe"
+```
+
+---
+
+### project
+
+Selects specific columns.
+
+```kusto
+DeviceProcessEvents
+| project Timestamp, DeviceName, FileName
+```
+
+---
+
+### summarize
+
+Groups and aggregates data.
+
+```kusto
+DeviceProcessEvents
+| summarize count() by FileName
+```
+
+---
+
+### take
+
+Returns a specified number of rows.
+
+```kusto
+DeviceProcessEvents
+| take 20
+```
+
+---
+
+### distinct
+
+Returns unique values.
+
+```kusto
+DeviceProcessEvents
+| distinct DeviceName
+```
+
+---
+
+### extend
+
+Creates a calculated column.
+
+```kusto
+DeviceProcessEvents
+| extend Details = strcat(FileName," - ",ProcessCommandLine)
+```
+
+---
+
+## String Operators
+
+### Exact Match
+
+```kusto
+FileName == "powershell.exe"
+```
+
+---
+
+### Case-insensitive Match
+
+```kusto
+FileName =~ "PowerShell.EXE"
+```
+
+---
+
+### Contains
+
+```kusto
+ProcessCommandLine contains "download"
+```
+
+---
+
+### Starts With
+
+```kusto
+FileName startswith "power"
+```
+
+---
+
+### Ends With
+
+```kusto
+FileName endswith ".exe"
+```
+
+---
+
+### Multiple Values
+
+```kusto
+FileName in ("powershell.exe","cmd.exe","wscript.exe")
+```
+
+---
+
+## Logical Operators
+
+### and
+
+Both conditions must be true.
+
+### or
+
+At least one condition must be true.
+
+### not
+
+Excludes matching records.
+
+---
+
+## Common SOC Queries
+
+### PowerShell Activity
+
+```kusto
+DeviceProcessEvents
+| where Timestamp > ago(24h)
+| where FileName =~ "powershell.exe"
+```
+
+---
+
+### Failed Logons
+
+```kusto
+DeviceLogonEvents
+| where Timestamp > ago(1h)
+| where ActionType == "LogonFailed"
+| summarize FailedAttempts=count()
+by AccountName,DeviceName,RemoteIP
+| where FailedAttempts >= 5
+```
+
+---
+
+### Unique Devices
+
+```kusto
+DeviceProcessEvents
+| distinct DeviceName
+```
+
+---
+
+### Most Executed Processes
+
+```kusto
+DeviceProcessEvents
+| summarize count() by FileName
+```
+
+---
+
+## KQL Best Practices
+
+* Apply the time filter first.
+* Filter data before aggregation.
+* Use project to reduce unnecessary columns.
+* Start with simple queries.
+* Use take while testing queries.
+* Use summarize for reporting.
+* Validate results before drawing conclusions.
+
+---
+
+## KQL Limitations
+
+KQL is **read-only**.
+
+KQL **cannot**:
+
+* Isolate devices
+* Delete malware
+* Disable users
+* Perform remediation
+
+KQL is used only to query and analyze data.
+
+---
+
+# Interview Questions (Quick Revision)
+
+### What is KQL?
+
+KQL is a read-only query language used to search, filter, analyze, and summarize security data in Microsoft security products.
+
+### Where is KQL used?
+
+* Microsoft Defender XDR
+* Microsoft Sentinel
+* Azure Log Analytics
+
+### What is the purpose of the pipe (`|`) symbol?
+
+It passes the output of one operator as the input to the next operator.
+
+### Difference between where and project?
+
+* **where** filters rows.
+* **project** selects columns.
+
+### What does summarize do?
+
+Groups and aggregates data.
+
+### Difference between == and contains?
+
+* **==** performs an exact match.
+* **contains** searches for specified text within a field.
+
+### Why should you apply a time filter early?
+
+To reduce the amount of data processed and improve query performance.
+
+### Can KQL isolate a device?
+
+No. KQL is a read-only query language used only for searching and analyzing data.
+
+---
+
+# Section 11 – Day 1 Revision
+
+## Topics Covered
+
+### Microsoft Security Fundamentals
+
+* Microsoft Security Ecosystem
+* Microsoft Defender XDR Architecture
+* Microsoft Defender Portal
+
+---
+
+### Incident Investigation
+
+* Alerts
+* Incidents
+* Alert Correlation
+* Incident Lifecycle
+* Assets
+* Entities
+* Investigation Graph
+* Evidence
+* Process Tree
+* Investigation Timeline
+* Root Cause Analysis (RCA)
+
+---
+
+### Automated Response
+
+* Automated Investigation and Response (AIR)
+* Investigation Verdicts
+* Remediation Actions
+* Automatic vs Manual Remediation
+* Fully Automated vs Semi-Automated
+
+---
+
+### Automatic Attack Disruption
+
+* High-confidence attack detection
+* Device isolation
+* User account protection
+* Stopping attack progression
+* Difference between AIR and Attack Disruption
+
+---
+
+### KQL Basics
+
+* Tables
+* Columns
+* where
+* project
+* summarize
+* take
+* distinct
+* extend
+* contains
+* ==
+* ago()
+* Common hunting queries
+
+---
+
+## Key Concepts to Remember
+
+### Alert vs Incident
+
+* Alert = Detection generated by a security product.
+* Incident = One or more correlated alerts representing a security attack.
+
+---
+
+### Asset vs Entity
+
+* Asset = Organization resource.
+* Entity = Object involved in an investigation.
+
+---
+
+### Entity vs Evidence
+
+* Entity = Object.
+* Evidence = Information collected about the object.
+
+---
+
+### AIR vs Attack Disruption
+
+| AIR                                | Attack Disruption             |
+| ---------------------------------- | ----------------------------- |
+| Investigates alerts                | Interrupts active attacks     |
+| Collects evidence                  | Stops attack progression      |
+| Assigns verdicts                   | Performs immediate protection |
+| Performs or recommends remediation | Contains attacker activity    |
+
+---
+
+### KQL Workflow
+
+```text
+Table
+ ↓
+where
+ ↓
+project
+ ↓
+summarize
+ ↓
+sort
+ ↓
+take
+```
+
+---
+
+# Day 1 Mock Exam Result
+
+**Score:** **23 / 25 (92%)**
+
+Areas to improve:
+
+* Entity vs Evidence
+* KQL `distinct` operator
+
+---
+
+# Day 1 Achievement
+
+By completing Day 1, you can now:
+
+✅ Understand the Microsoft Security Ecosystem
+
+✅ Navigate Microsoft Defender XDR
+
+✅ Differentiate alerts and incidents
+
+✅ Investigate incidents using the Investigation Graph
+
+✅ Explain Assets, Entities, and Evidence
+
+✅ Understand Process Trees and Investigation Timelines
+
+✅ Perform Root Cause Analysis
+
+✅ Explain Automated Investigation and Response (AIR)
+
+✅ Explain Automatic Attack Disruption
+
+✅ Write basic KQL hunting queries
+
+✅ Answer common SC-200 interview questions
+
+---
+
 # Progress
 
 * ✅ Section 1 – SC-200 Overview
@@ -1792,7 +2262,15 @@ Attack Disruption immediately stops or limits ransomware activity by isolating d
 * ✅ Section 5 – Incidents and Alerts
 * ✅ Section 6 – Assets and Entities
 * ✅ Section 7 – Investigation Graph and Evidence
-* ✅ Section 8 – Automated Investigation and Response
+* ✅ Section 8 – Automated Investigation and Response (AIR)
 * ✅ Section 9 – Automatic Attack Disruption
-* ⏳ Section 10 – KQL Introduction
-* ⬜ Section 11 – Day 1 Revision and Quiz
+* ✅ Section 10 – Kusto Query Language (KQL)
+* ✅ Section 11 – Day 1 Revision and Quiz
+
+---
+
+## Day 1 Status
+
+**Completed Successfully ✅**
+
+**Mock Exam Score:** **23/25 (92%)**
