@@ -82,7 +82,7 @@ The main objectives of this study plan are to:
 |  Day | Date      | Main Topic                                 | Practical Work                                                               | Status      |
 | ---: | --------- | ------------------------------------------ | ---------------------------------------------------------------------------- | ----------- |
 |    1 | 28 July   | SC-200 and Microsoft Security Fundamentals | Explore Microsoft Defender portal and write basic KQL queries                | Completed   |
-|    2 | 29 July   | Microsoft Sentinel Fundamentals            | Create or explore a Sentinel workspace and understand its architecture       | Not Started |
+|    2 | 29 July   | Microsoft Sentinel Fundamentals            | Create or explore a Sentinel workspace and understand its architecture       | In Progress |
 |    3 | 30 July   | Data Collection and Connectors             | Study data connectors, tables, agents, DCRs and ingestion methods            | Not Started |
 |    4 | 31 July   | KQL Fundamentals                           | Practise `search`, `where`, `project`, `sort`, `take` and `distinct`         | Not Started |
 |    5 | 1 August  | Intermediate KQL                           | Practise `summarize`, `extend`, `parse`, `join`, `union` and time filters    | Not Started |
