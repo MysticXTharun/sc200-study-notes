@@ -1302,6 +1302,487 @@ Review the sender and recipient, verify whether the user clicked the link, analy
 
 ---
 
+# Section 8 – Automated Investigation and Response (AIR)
+
+## What is Automated Investigation and Response?
+
+**Automated Investigation and Response (AIR)** is a Microsoft Defender XDR capability that automatically investigates security alerts, collects evidence, determines investigation verdicts, and recommends or performs remediation actions.
+
+AIR reduces repetitive investigation work and allows SOC analysts to focus on complex security incidents.
+
+---
+
+## Why is AIR Important?
+
+* Reduces manual investigation effort
+* Collects evidence automatically
+* Speeds up alert investigation
+* Provides consistent investigation results
+* Reduces alert fatigue
+* Improves Mean Time to Respond (MTTR)
+* Helps analysts focus on high-priority incidents
+
+---
+
+## AIR Workflow
+
+```text
+Threat Detected
+      ↓
+Alert Generated
+      ↓
+Automated Investigation Starts
+      ↓
+Evidence Collected
+      ↓
+Entities Analyzed
+      ↓
+Investigation Verdict Assigned
+      ↓
+Remediation Recommended or Performed
+      ↓
+Analyst Reviews Results
+```
+
+---
+
+## Evidence Collected by AIR
+
+AIR can collect and analyze information such as:
+
+* File hashes
+* Process Tree
+* Process command lines
+* Registry changes
+* Scheduled tasks
+* Services
+* Network connections
+* Device Timeline
+* User activity
+* Files created or modified
+
+---
+
+## Investigation Verdicts
+
+AIR assigns an investigation verdict after analyzing the available evidence.
+
+### Malicious
+
+The evidence confirms that malicious activity occurred.
+
+Examples:
+
+* Malware
+* Ransomware
+* Trojan
+* Backdoor
+
+### Suspicious
+
+The activity may be malicious, but additional analyst investigation is required.
+
+### Clean
+
+No malicious activity was identified.
+
+### No Verdict
+
+There is insufficient evidence to determine whether the activity is malicious or clean.
+
+---
+
+## Remediation Actions
+
+Depending on the investigation result and configured automation level, AIR may recommend or perform actions such as:
+
+* Quarantine a malicious file
+* Stop a malicious process
+* Delete a malicious file
+* Remove a registry key
+* Remove a scheduled task
+* Block a file
+* Isolate a device
+* Restrict malicious activity
+
+---
+
+## Automatic vs Manual Remediation
+
+| Automatic Remediation                          | Manual Remediation                   |
+| ---------------------------------------------- | ------------------------------------ |
+| AIR performs permitted actions automatically   | Analyst reviews and performs actions |
+| Faster response                                | More human control                   |
+| Useful for repetitive tasks                    | Useful for sensitive systems         |
+| Depends on automation settings and permissions | Depends on analyst approval          |
+
+---
+
+## Fully Automated vs Semi-Automated
+
+### Fully Automated
+
+AIR automatically:
+
+* Investigates the alert
+* Collects evidence
+* Assigns verdicts
+* Performs permitted remediation actions
+
+### Semi-Automated
+
+AIR automatically investigates and recommends remediation, but an analyst must approve certain response actions.
+
+### Manual
+
+The analyst reviews investigation findings and performs the required remediation actions manually.
+
+---
+
+## Example Scenario
+
+A user opens a malicious attachment:
+
+```text
+invoice.docm
+      ↓
+winword.exe
+      ↓
+powershell.exe
+      ↓
+payload.exe
+```
+
+AIR may:
+
+* Review the Process Tree
+* Analyze the file hash
+* Check PowerShell commands
+* Review network connections
+* Identify persistence mechanisms
+* Assign a malicious verdict
+* Quarantine the file
+* Stop the malicious process
+* Recommend device isolation
+
+---
+
+## Limitations of AIR
+
+AIR cannot completely replace SOC analysts.
+
+Analysts are still required to:
+
+* Validate complex incidents
+* Review false positives
+* Perform Root Cause Analysis
+* Make business-specific decisions
+* Communicate with stakeholders
+* Recover affected systems
+* Complete incident documentation
+
+---
+
+# Interview Questions (Quick Revision)
+
+### What is Automated Investigation and Response?
+
+AIR is a Microsoft Defender XDR capability that automatically investigates alerts, collects evidence, assigns investigation verdicts, and recommends or performs remediation actions.
+
+### Why is AIR important in a SOC?
+
+AIR reduces repetitive investigation work, speeds up response, reduces alert fatigue, and allows analysts to focus on complex incidents.
+
+### What evidence can AIR collect?
+
+* File hashes
+* Process Tree
+* Registry changes
+* Scheduled tasks
+* Network connections
+* Device Timeline
+* User activity
+
+### What investigation verdicts can AIR assign?
+
+* Malicious
+* Suspicious
+* Clean
+* No Verdict
+
+### What remediation actions can AIR perform?
+
+AIR may quarantine files, stop processes, remove persistence mechanisms, delete malicious files, block files, or isolate devices.
+
+### Difference between automatic and manual remediation?
+
+Automatic remediation allows AIR to perform permitted actions automatically, while manual remediation requires the analyst to review and execute the actions.
+
+### Difference between fully automated and semi-automated remediation?
+
+Fully automated remediation performs permitted actions without analyst approval. Semi-automated remediation investigates automatically but may require analyst approval before performing response actions.
+
+### Can AIR replace SOC analysts?
+
+No. AIR reduces workload, but analysts are still needed for validation, Root Cause Analysis, recovery, documentation, and business decisions.
+
+### Explain the AIR workflow.
+
+An alert is generated, AIR starts the investigation, collects evidence, analyzes entities, assigns a verdict, recommends or performs remediation, and sends the results for analyst review.
+
+### How would AIR investigate malicious PowerShell activity?
+
+AIR reviews the Process Tree, PowerShell command line, files executed, network connections, registry changes, and endpoint telemetry. It then assigns a verdict and recommends or performs remediation.
+
+---
+
+# Section 9 – Automatic Attack Disruption
+
+## What is Automatic Attack Disruption?
+
+**Automatic Attack Disruption** is a Microsoft Defender XDR capability that detects high-confidence active attacks and automatically interrupts the attack chain in real time.
+
+Its purpose is to prevent attackers from progressing further and achieving their objectives.
+
+---
+
+## Why is Automatic Attack Disruption Important?
+
+* Stops active attacks quickly
+* Limits malware spread
+* Prevents lateral movement
+* Reduces ransomware impact
+* Protects affected users and devices
+* Gives AIR and SOC analysts more time to investigate
+* Reduces business impact
+* Improves response speed
+
+---
+
+## Automatic Attack Disruption Workflow
+
+```text
+Attacker Activity Detected
+      ↓
+Defender Products Generate Signals
+      ↓
+Defender XDR Correlates Signals
+      ↓
+High-Confidence Attack Identified
+      ↓
+Automatic Attack Disruption Activates
+      ↓
+Protective Actions Performed
+      ↓
+AIR Investigates the Incident
+      ↓
+SOC Analyst Reviews and Completes Response
+```
+
+---
+
+## AIR vs Automatic Attack Disruption
+
+| AIR                                   | Automatic Attack Disruption           |
+| ------------------------------------- | ------------------------------------- |
+| Investigates alerts                   | Interrupts active attacks             |
+| Collects evidence                     | Stops attack progression              |
+| Assigns investigation verdicts        | Performs immediate protective actions |
+| Recommends or performs remediation    | Contains affected assets              |
+| Focuses on investigation and response | Focuses on immediate containment      |
+
+---
+
+## Attacks That May Trigger Attack Disruption
+
+Automatic Attack Disruption is designed for high-confidence attacks such as:
+
+* Ransomware
+* Credential theft
+* Lateral movement
+* Business Email Compromise
+* Human-operated attacks
+* Identity-based attacks
+* Active malicious process execution
+
+---
+
+## Attack Disruption Actions
+
+Depending on the attack scenario, Microsoft Defender XDR may:
+
+* Isolate a compromised device
+* Disable a compromised user account
+* Stop malicious processes
+* Restrict attacker access
+* Block malicious activity
+* Contain affected assets
+* Prevent lateral movement
+* Interrupt ransomware activity
+
+---
+
+## Device Isolation
+
+Device isolation disconnects the affected endpoint from the organizational network while allowing communication with Microsoft Defender.
+
+```text
+Compromised Device
+      ×
+Internal Network
+      ×
+External Network
+      ✓
+Microsoft Defender Services
+```
+
+This allows analysts to continue investigating and responding to the affected device.
+
+---
+
+## High-Confidence Detection
+
+Automatic Attack Disruption does not activate for every alert.
+
+It requires high-confidence attack signals based on correlated activity across Microsoft Defender products.
+
+This helps prevent unnecessary disruption caused by:
+
+* False positives
+* Isolated alerts
+* Low-confidence detections
+* Single suspicious events
+
+---
+
+## Example Ransomware Scenario
+
+A user downloads and opens a malicious document:
+
+```text
+Malicious Document
+      ↓
+winword.exe
+      ↓
+powershell.exe
+      ↓
+Malware Downloaded
+      ↓
+Ransomware Activity
+```
+
+Microsoft Defender XDR identifies:
+
+* Suspicious PowerShell execution
+* Malicious file activity
+* Credential theft
+* Lateral movement
+* Ransomware behavior
+
+Automatic Attack Disruption may:
+
+* Stop the malicious process
+* Isolate the affected device
+* Disable the compromised account
+* Prevent lateral movement
+
+AIR then:
+
+* Collects evidence
+* Reviews the Process Tree
+* Analyzes files and network activity
+* Assigns investigation verdicts
+* Recommends or performs remediation
+
+The SOC analyst validates the findings, completes Root Cause Analysis, recovers the system, and documents the incident.
+
+---
+
+## What Happens After Attack Disruption?
+
+After the active attack is interrupted:
+
+```text
+Attack Interrupted
+      ↓
+AIR Investigation
+      ↓
+Evidence Collection
+      ↓
+Verdict Determination
+      ↓
+Remediation
+      ↓
+Analyst Validation
+      ↓
+Root Cause Analysis
+      ↓
+Recovery and Documentation
+```
+
+---
+
+## Limitations of Automatic Attack Disruption
+
+Automatic Attack Disruption:
+
+* Does not activate for every alert
+* Requires high-confidence attack signals
+* Does not perform complete Root Cause Analysis
+* Does not replace SOC analysts
+* Does not always remove every malicious artifact
+* Requires analyst validation and recovery actions
+
+---
+
+# Interview Questions (Quick Revision)
+
+### What is Automatic Attack Disruption?
+
+Automatic Attack Disruption is a Microsoft Defender XDR capability that detects high-confidence active attacks and automatically interrupts the attack chain in real time.
+
+### Why is Attack Disruption important?
+
+It stops or limits active attacks, prevents lateral movement, reduces malware impact, and provides analysts more time to investigate.
+
+### Difference between AIR and Attack Disruption?
+
+Attack Disruption immediately interrupts active attacks, while AIR investigates alerts, collects evidence, assigns verdicts, and recommends or performs remediation.
+
+### What attacks can trigger Attack Disruption?
+
+* Ransomware
+* Credential theft
+* Lateral movement
+* Business Email Compromise
+* Human-operated attacks
+
+### What actions can Attack Disruption perform?
+
+It may isolate devices, disable compromised accounts, stop malicious processes, contain assets, and interrupt malicious activity.
+
+### Why does Attack Disruption not activate for every alert?
+
+It requires high-confidence signals and correlated attack activity to avoid unnecessary disruption caused by false positives or low-confidence alerts.
+
+### Explain the Attack Disruption workflow.
+
+Defender products detect suspicious activity, Defender XDR correlates the signals, identifies a high-confidence attack, activates Attack Disruption, performs protective actions, and then AIR and analysts continue the investigation.
+
+### Can Attack Disruption replace SOC analysts?
+
+No. Analysts are still required for validation, Root Cause Analysis, remediation, recovery, documentation, and business decisions.
+
+### What happens after Attack Disruption stops an attack?
+
+AIR investigates the incident, collects evidence, assigns verdicts, and recommends or performs remediation. The analyst then validates the findings and completes the incident response process.
+
+### How do Attack Disruption and AIR work together during ransomware?
+
+Attack Disruption immediately stops or limits ransomware activity by isolating devices or disabling accounts. AIR then investigates the attack, collects evidence, assigns verdicts, and performs or recommends remediation.
+
+---
+
 # Progress
 
 * ✅ Section 1 – SC-200 Overview
@@ -1311,7 +1792,7 @@ Review the sender and recipient, verify whether the user clicked the link, analy
 * ✅ Section 5 – Incidents and Alerts
 * ✅ Section 6 – Assets and Entities
 * ✅ Section 7 – Investigation Graph and Evidence
-* ⏳ Section 8 – Automated Investigation and Response
-* ⬜ Section 9 – Automatic Attack Disruption
-* ⬜ Section 10 – KQL Introduction
+* ✅ Section 8 – Automated Investigation and Response
+* ✅ Section 9 – Automatic Attack Disruption
+* ⏳ Section 10 – KQL Introduction
 * ⬜ Section 11 – Day 1 Revision and Quiz
