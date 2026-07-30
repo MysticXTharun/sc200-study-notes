@@ -133,9 +133,6 @@ Day 1 covers the foundation required for the remaining study plan:
 sc200-study-notes/
 ├── README.md
 ├── Day-01-Security-Fundamentals/
-│   ├── README.md
-│   ├── notes.md
-│   └── kql-practice.md
 ├── Day-02-Microsoft-Sentinel/
 ├── Day-03-Data-Connectors/
 ├── Day-04-KQL-Fundamentals/
