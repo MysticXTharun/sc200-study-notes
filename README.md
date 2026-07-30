@@ -254,7 +254,7 @@ Each study-day folder will contain:
 | Category                        | Progress    |
 | ------------------------------- | ----------- |
 | Microsoft Security Fundamentals | Completed   |
-| Microsoft Sentinel              | Not Started |
+| Microsoft Sentinel              | In Progress |
 | Microsoft Defender XDR          | Not Started |
 | KQL                             | Not Started |
 | Incident Investigation          | Not Started |
