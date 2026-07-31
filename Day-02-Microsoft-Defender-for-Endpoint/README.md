@@ -238,16 +238,331 @@ Microsoft Defender for Endpoint is Microsoft’s enterprise endpoint security pl
 
 ---
 
-## Day 2 Progress
+# Day 2 – Microsoft Defender for Endpoint
 
-* ✅ Section 1 – Introduction to Microsoft Defender for Endpoint
-* 🔄 Section 2 – MDE Architecture Deep Dive
-* ⬜ Section 3 – Endpoint Onboarding
-* ⬜ Section 4 – Device Inventory
-* ⬜ Section 5 – Device Timeline
-* ⬜ Section 6 – Machine Actions
-* ⬜ Section 7 – Indicators
-* ⬜ Section 8 – Threat and Vulnerability Management
-* ⬜ Section 9 – Custom Detection Rules
-* ⬜ Section 10 – Live Response and Advanced Hunting
-* ⬜ Section 11 – Revision and Mock Exam
+# Section 2 – Microsoft Defender for Endpoint Architecture (Deep Dive)
+
+## Architecture Overview
+
+Microsoft Defender for Endpoint combines multiple security components to provide end-to-end endpoint protection.
+
+Its architecture consists of:
+
+- Microsoft Defender Antivirus (NGAV)
+- Defender for Endpoint Sensor
+- Microsoft Defender Cloud
+- Behavioral Analytics
+- Threat Intelligence
+- Machine Learning
+- Attack Surface Reduction (ASR)
+- Microsoft Defender SmartScreen
+- Device Control
+- Microsoft Defender XDR
+
+Together, these components help prevent, detect, investigate, and respond to endpoint threats.
+
+---
+
+## Microsoft Defender Architecture
+
+```text
+                     Microsoft Defender XDR
+                               ▲
+                               │
+                    Alerts and Incidents
+                               ▲
+                               │
+                Microsoft Defender Cloud
+      ┌─────────────────────────────────────────┐
+      │ • Machine Learning                      │
+      │ • Behavioral Analytics                  │
+      │ • Threat Intelligence                   │
+      │ • Global Threat Signals                 │
+      └─────────────────────────────────────────┘
+                               ▲
+                               │
+                  Endpoint Telemetry
+                               ▲
+                               │
+                  Defender for Endpoint Sensor
+                               ▲
+                               │
+      ┌─────────────────────────────────────────┐
+      │ Endpoint Device                         │
+      │ • Defender Antivirus                    │
+      │ • ASR Rules                             │
+      │ • SmartScreen                           │
+      │ • Device Control                        │
+      └─────────────────────────────────────────┘
+```
+
+---
+
+# Microsoft Defender Antivirus (NGAV)
+
+Microsoft Defender Antivirus is Microsoft's Next-Generation Antivirus solution.
+
+Its primary responsibilities include:
+
+- Malware prevention
+- Signature-based detection
+- Heuristic analysis
+- Cloud-delivered protection
+- File quarantine
+- Scheduled scans
+- Real-time protection
+
+Example:
+
+```text
+User downloads Trojan.exe
+        ↓
+Defender Antivirus scans file
+        ↓
+Malicious signature detected
+        ↓
+File quarantined
+        ↓
+Alert generated
+```
+
+---
+
+# Defender for Endpoint Sensor
+
+The Defender Sensor is the EDR component of Microsoft Defender for Endpoint.
+
+Unlike an antivirus engine, the sensor continuously collects endpoint telemetry even when no malware is detected.
+
+Examples of collected telemetry include:
+
+- Process creation
+- Process termination
+- Parent-child process relationships
+- Command-line arguments
+- File creation and deletion
+- Registry modifications
+- Network connections
+- User logons
+- Services
+- Scheduled tasks
+
+Example:
+
+```text
+powershell.exe -EncodedCommand
+```
+
+The sensor records:
+
+- Parent process
+- Command line
+- User
+- Timestamp
+- Network activity
+- Related events
+
+This telemetry is securely transmitted to Microsoft Defender Cloud for further analysis.
+
+---
+
+# Microsoft Defender Cloud
+
+The Microsoft Defender Cloud receives endpoint telemetry from Defender Sensors deployed across managed devices.
+
+The cloud analyzes telemetry using:
+
+- Behavioral Analytics
+- Machine Learning
+- Threat Intelligence
+- Detection Rules
+- Global Threat Signals
+
+Unlike traditional antivirus solutions, Microsoft analyzes telemetry collected from millions of devices worldwide to identify suspicious behavior and emerging threats.
+
+---
+
+# Behavioral Monitoring
+
+Behavioral monitoring focuses on identifying malicious actions instead of relying only on malware signatures.
+
+Examples include:
+
+- Credential dumping
+- PowerShell abuse
+- Office spawning PowerShell
+- LSASS access
+- Shadow copy deletion
+- Mass file encryption
+- WMI abuse
+
+Behavioral monitoring enables Microsoft Defender to detect fileless and previously unknown attacks.
+
+---
+
+# Attack Surface Reduction (ASR)
+
+Attack Surface Reduction (ASR) rules are Microsoft-provided security rules designed to block risky attack techniques before they become security incidents.
+
+Common ASR rules include:
+
+- Block Office applications from creating child processes
+- Block executable content from email
+- Block credential stealing from LSASS
+- Block JavaScript or VBScript from launching executables
+- Block ransomware behavior
+
+ASR reduces the attack surface exposed to attackers and prevents common exploitation techniques.
+
+---
+
+# Microsoft Defender SmartScreen
+
+Microsoft Defender SmartScreen protects users against:
+
+- Malicious websites
+- Phishing websites
+- Malicious downloads
+- Untrusted applications
+
+Example:
+
+```text
+User opens fake banking website
+        ↓
+SmartScreen checks reputation
+        ↓
+Website identified as phishing
+        ↓
+Access blocked
+```
+
+---
+
+# Device Control
+
+Device Control allows administrators to manage removable storage devices.
+
+Examples:
+
+- USB drives
+- External HDDs
+- External SSDs
+
+Policies can include:
+
+- Block removable media
+- Read-only access
+- Allow only approved devices
+- Audit device usage
+
+---
+
+# Detection Workflow
+
+```text
+PowerShell Execution
+        ↓
+Defender Sensor
+        ↓
+Endpoint Telemetry
+        ↓
+Microsoft Defender Cloud
+        ↓
+Behavioral Analytics
+Machine Learning
+Threat Intelligence
+        ↓
+Alert
+        ↓
+Microsoft Defender XDR
+        ↓
+Incident
+        ↓
+Automated Investigation and Response (AIR)
+        ↓
+SOC Analyst Investigation
+```
+
+For supported high-confidence attacks, Microsoft Defender XDR may also trigger **Automatic Attack Disruption** to contain malicious activity.
+
+---
+
+# NGAV vs EDR
+
+| Next-Generation Antivirus (NGAV) | Endpoint Detection and Response (EDR) |
+|----------------------------------|----------------------------------------|
+| Prevents malware | Detects, investigates and responds |
+| Uses signatures and heuristics | Uses continuous endpoint telemetry |
+| Focuses on prevention | Focuses on detection and investigation |
+| Quarantines malicious files | Provides timelines, alerts and incidents |
+| Local protection with cloud assistance | Cloud-driven detection and response |
+
+NGAV and EDR complement each other to provide comprehensive endpoint security.
+
+---
+
+# Quick Revision
+
+### What is NGAV?
+
+Microsoft Defender Antivirus provides malware prevention through signatures, heuristics and cloud-delivered protection.
+
+### What does the Defender Sensor do?
+
+Continuously collects endpoint telemetry for cloud-based analysis.
+
+### What does Microsoft Defender Cloud do?
+
+Analyzes telemetry using machine learning, behavioral analytics and threat intelligence.
+
+### What is Behavioral Monitoring?
+
+Behavior-based detection that identifies malicious actions instead of relying only on malware signatures.
+
+### What are ASR Rules?
+
+Microsoft security rules that proactively block common attack techniques before they become incidents.
+
+### What does SmartScreen protect against?
+
+- Phishing websites
+- Malicious websites
+- Malicious downloads
+- Untrusted applications
+
+### What is Device Control?
+
+A feature that manages removable storage devices such as USB drives, external HDDs and SSDs through configurable security policies.
+
+---
+
+# Interview Questions
+
+1. Explain the Microsoft Defender for Endpoint architecture.
+2. What is the difference between NGAV and EDR?
+3. Why does the Defender Sensor continuously collect telemetry?
+4. What is cloud-delivered protection?
+5. What is behavioral monitoring? Give three examples.
+6. What are Attack Surface Reduction (ASR) rules?
+7. What does Microsoft Defender SmartScreen protect against?
+8. What is Device Control?
+9. Explain the complete flow from PowerShell execution to incident creation in Microsoft Defender for Endpoint.
+10. Why is behavioral detection more effective than signature-only detection?
+11. If a malicious Office document launches `powershell.exe`, which MDE components help detect or prevent the attack, and how?
+
+---
+
+# Day 2 Progress
+
+- ✅ Section 1 – Introduction to Microsoft Defender for Endpoint
+- ✅ Section 2 – MDE Architecture (Deep Dive)
+- 🔄 Section 3 – Endpoint Onboarding
+- ⬜ Section 4 – Device Inventory
+- ⬜ Section 5 – Device Timeline
+- ⬜ Section 6 – Machine Actions
+- ⬜ Section 7 – Indicators
+- ⬜ Section 8 – Threat and Vulnerability Management
+- ⬜ Section 9 – Custom Detection Rules
+- ⬜ Section 10 – Live Response and Advanced Hunting
+- ⬜ Section 11 – Revision and Mock Exam
